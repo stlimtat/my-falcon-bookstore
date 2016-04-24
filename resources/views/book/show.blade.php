@@ -16,6 +16,8 @@
                     <dl class="dl-horizontal">
                         <dt>Description</dt>
                         <dd>{{ $book->description }}</dd>
+                        <dt>Price</dt>
+                        <dd>{{ $book->price }}</dd>
                         <dt>Author(s)</dt>
                         <dd>
                             @foreach ($book->authors as $i => $author)
