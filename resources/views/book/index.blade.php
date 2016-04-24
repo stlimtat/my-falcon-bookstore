@@ -25,8 +25,7 @@
                             <th>ID</th>
                             <th>Title</th>
                             <th>Description</th>
-                            <th>Author(s)</th>
-                            <th>Genre(s)</th>
+                            <th>Price</th>
                             <th>Release Date</th>
                         </tr>
                         </thead>
@@ -35,8 +34,7 @@
                             <th>ID</th>
                             <th>Title</th>
                             <th>Description</th>
-                            <th>Author(s)</th>
-                            <th>Genre(s)</th>
+                            <th>Price</th>
                             <th>Release Date</th>
                         </tr>
                         </tfoot>
@@ -63,8 +61,7 @@
                     {data: 'id'},
                     {data: 'title'},
                     {data: 'description'},
-                    {data: 'title'},
-                    {data: 'title'},
+                    {data: 'price'},
                     {data: 'release_date'},
                 ],
             });
