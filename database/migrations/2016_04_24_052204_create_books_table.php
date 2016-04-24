@@ -21,7 +21,9 @@ class CreateBooksTable extends Migration
                 $table->string('title');
                 $table->longText('description');
                 $table->date('release_date');
+                $table->bigInteger('created_by')->unsigned();
                 $table->foreign('created_by')->references('id')->on('users');
+                $table->bigInteger('updated_by')->unsigned();
                 $table->foreign('updated_by')->references('id')->on('users');
                 $table->timestamps();
             });
