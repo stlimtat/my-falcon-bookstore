@@ -1,43 +1,52 @@
 @extends('layouts.app')
 
+@section('page-title')
+    Falcon BookStore | Details
+@endsection
+
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">{{ $book->title }}</div>
-                    <div class="panel-body">
-                        <ul class="chat">
-                            @foreach ($book->authors as $author)
-                                <li class="left clearfix">
-                               <span class="chat-img pull-left">
-                                    <img src="" alt="User Avatar" class="img-circle"/>
-                                </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="primary-font">
-                                                {{$author->name}}
-                                            </strong>
-                                        </div>
-                                    </div>
-                                </li>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <i class="fa fa-text-width"></i>
+                    <h3 class="box-title">{{$book->id}} - {{ $book->title }}</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <dl class="dl-horizontal">
+                        <dt>Description</dt>
+                        <dd>{{ $book->description }}</dd>
+                        <dt>Author(s)</dt>
+                        <dd>
+                            @foreach ($book->authors as $i => $author)
+                                @if ($i > 0)
+                                    |
+                                @endif
+                                {{ $author->name }}
                             @endforeach
-                            <li class="right clearfix">
-                                <div class="chat-body clearfix">
-                                    <string class="primary-font">
-                                        {{ $book->release_date }}
-                                    </string>
-                                </div>
-                            </li>
-                            <li class="left clearfix">
-                                <div class="chat-body clearfix">
-                                    {{ $book->description }}
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        </dd>
+                        <dt>Genre(s)</dt>
+                        <dd>
+                            @foreach ($book->genres as $i => $genre)
+                                @if ($i > 0)
+                                    |
+                                @endif
+                                {{ $genre->name }}
+                            @endforeach
+                        </dd>
+                        <dt>Release Date</dt>
+                        <dd>{{ $book->release_date }}</dd>
+                        <dt>Created By</dt>
+                        <dd>{{ App\User::find($book->created_by)->name }}</dd>
+                        <dt>Created At</dt>
+                        <dd>{{ $book->created_at }}</dd>
+                        <dt>Updated By</dt>
+                        <dd>{{ App\User::find($book->created_by)->name }}</dd>
+                        <dt>Updated At</dt>
+                        <dd>{{ $book->updated_at }}</dd>
+                    </dl>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- ./col -->
     </div>
 @endsection
