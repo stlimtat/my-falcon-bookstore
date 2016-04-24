@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Carbon\Carbon;
 
 class CreateBooksTable extends Migration
 {
@@ -19,8 +20,8 @@ class CreateBooksTable extends Migration
             Schema::create('books', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('title');
-                $table->longText('description');
-                $table->date('release_date');
+                $table->longText('description')->nullable();
+                $table->date('release_date')->default(Carbon::now());
                 $table->bigInteger('created_by')->unsigned();
                 $table->foreign('created_by')->references('id')->on('users');
                 $table->bigInteger('updated_by')->unsigned();
