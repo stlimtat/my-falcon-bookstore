@@ -10,7 +10,7 @@
 @section('content')
     <div class="register-box">
         <div class="register-logo">
-            <a href="../../index2.html"><b>Admin</b>LTE</a>
+            <a href="/home"><b>Falcon</b>BookStore</a>
         </div>
 
         <div class="register-box-body">
