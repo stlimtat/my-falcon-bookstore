@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Facades\Datatables;
 
 class BookController extends Controller
 {
@@ -20,13 +21,8 @@ class BookController extends Controller
 
     public function getlist(Request $request)
     {
-        $start = $request->input('start');
-        $draw = $request->input('draw');
-        $order = $request->input('order');
-        $length = $request->input('length');
-        $books = Book::paginate($length);
-
-        return response()->json($books);
+        return Datatables::eloquent(Book::query())->make(true);
+        // return Datatables::queryBuilder(DB::table('books'))->make(true);
     }
 
     /**
