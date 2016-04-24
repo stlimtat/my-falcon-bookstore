@@ -1,8 +1,8 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Carbon\Carbon;
 
 class CreateBooksTable extends Migration
 {
@@ -26,6 +26,7 @@ class CreateBooksTable extends Migration
                 $table->foreign('created_by')->references('id')->on('users');
                 $table->bigInteger('updated_by')->unsigned();
                 $table->foreign('updated_by')->references('id')->on('users');
+                $table->float('price')->default(0.0);
                 $table->timestamps();
             });
             // Define the many to many relationship with authors

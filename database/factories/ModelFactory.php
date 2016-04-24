@@ -28,7 +28,7 @@ $factory->define(App\Author::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Genre::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->randomElement(['Adventure', 'Detective', 'Thriller', 'Fantasy', 'Romance', 'Teens']),
         'description' => $faker->sentence
     ];
 });
@@ -36,8 +36,9 @@ $factory->define(App\Genre::class, function (Faker\Generator $faker) {
 $factory->define(App\Book::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->name,
-        'description' => $faker->sentence,
+        'description' => $faker->paragraph(5, true),
         'release_date' => $faker->date('Y-m-d', 'now'),
+        'price' => $faker->randomFloat(2, 0.0, 100.00),
         'created_by' => 1,
         'updated_by' => 1,
     ];
