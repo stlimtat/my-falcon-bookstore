@@ -30,13 +30,17 @@ class CreateBooksTable extends Migration
             // Define the many to many relationship with authors
             Schema::create('author_book', function (Blueprint $table) {
                 $table->bigIncrements('id');
+                $table->bigInteger('author_id')->unsigned();
                 $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
+                $table->bigInteger('book_id')->unsigned();
                 $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
                 $table->timestamps();
             });
             Schema::create('genre_book', function (Blueprint $table) {
                 $table->bigIncrements('id');
+                $table->bigInteger('genre_id')->unsigned();
                 $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
+                $table->bigInteger('book_id')->unsigned();
                 $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
                 $table->timestamps();
             });
@@ -52,9 +56,19 @@ class CreateBooksTable extends Migration
     public function down()
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->dropForeign(['created_by', 'updated_by']);
+            $table->dropForeign(['created_by']);
+            $table->dropForeign(['updated_by']);
         });
-
-        Schema::dropIfExists('books');
+        Schema::table('genre_book', function (Blueprint $table) {
+            $table->dropForeign(['genre_id']);
+            $table->dropForeign(['book_id']);
+        });
+        Schema::table('author_book', function (Blueprint $table) {
+            $table->dropForeign(['author_id']);
+            $table->dropForeign(['book_id']);
+        });
+        Schema::drop('genre_book');
+        Schema::drop('author_book');
+        Schema::drop('books');
     }
 }
