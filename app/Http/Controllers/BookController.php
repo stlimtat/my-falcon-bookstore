@@ -15,8 +15,18 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::paginate(20);
-        return view('book.index', compact('books'));
+        return view('book.index');
+    }
+
+    public function getlist(Request $request)
+    {
+        $start = $request->input('start');
+        $draw = $request->input('draw');
+        $order = $request->input('order');
+        $length = $request->input('length');
+        $books = Book::paginate($length);
+
+        return response()->json($books);
     }
 
     /**
