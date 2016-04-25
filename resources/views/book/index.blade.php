@@ -41,8 +41,7 @@
                     </table>
                 </div><!--/.box-body-->
             </div><!-- /.box -->
-        </div>
-        <!- /.col-md-6 -->
+        </div><!-- /.col-md-6 -->
     </div><!-- /.row -->
     @endsection
 
@@ -67,5 +66,4 @@
             });
         });
     </script>
-
 @endsection
