@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Author;
 use App\Book;
+use App\Genre;
 use App\Http\Requests;
+use Auth;
 use Illuminate\Http\Request;
+use Validator;
 use Yajra\Datatables\Facades\Datatables;
 
 class BookController extends Controller
@@ -38,7 +42,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('book.create');
+        $authors = Author::all();
+        $genres = Genre::all();
+        return view('book.create', [$authors, $genres]);
     }
 
     /**
@@ -49,7 +55,31 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255',
+            'price' => 'required|numeric|min:0.0',
+            'release_date' => 'required|date',
+            'description' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('book/create')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $book = new Book;
+            // Did not wanna use the $this->create
+            $book->title = $request->title;
+            $book->description = $request->description;
+            $book->price = $request->price;
+            $book->release_date = $request->release_date;
+            if (Auth::check()) {
+                $book->created_by = $request->user()->id;
+                $book->updated_by = $request->user()->id;
+            }
+            $book->save();
+        }
+        return redirect()->route('book.index');
     }
 
     /**
