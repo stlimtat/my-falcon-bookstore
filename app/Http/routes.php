@@ -13,10 +13,12 @@
 
 Route::get('/', 'BookController@index');
 
-Route::auth();
+Route::group(['middleware' => ['web']], function () {
+    Route::auth();
 
-Route::resource('genre', 'GenreController');
-Route::resource('author', 'AuthorController');
-Route::resource('book', 'BookController');
+    Route::resource('genre', 'GenreController');
+    Route::resource('author', 'AuthorController');
+    Route::resource('book', 'BookController');
+});
 
 Route::get('mylist', 'BookController@getList');
