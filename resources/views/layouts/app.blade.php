@@ -114,19 +114,15 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">MAIN NAVIGATION</li>
-                <li class="active treeview">
-                    <a href="#">
+                <li class="treeview">
+                    <a href="{{ route('book.create') }}">
                         <i class="fa fa-edit"></i> <span>New Book</span>
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Books</span> <i class="fa fa-angle-left pull-right"></i>
+                    <a href="{{ route('book.index') }}">
+                        <i class="fa fa-dashboard"></i> <span>Books</span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href=""><i class="fa fa-circle-o"></i> Sorted By Authors</a></li>
-                        <li><a href=""><i class="fa fa-circle-o"></i> Sorted By Genres</a></li>
-                    </ul>
                 </li>
            </ul>
         </section>
